@@ -1,26 +1,49 @@
 import { useContext } from "react";
-import {authContext} from "../context/AuthContext";
 
-export async function apiFetch(endpoint, options = {}) {
-  const url = `${import.meta.env.VITE_API_URL}${endpoint}`;
-  const token = localStorage.getItem('token');
+import { AuthContext } from "../context/AuthContext";
 
-  const headers = {
-    'Content-Type': 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    ...options.headers,
-  };
+export function useFetch() {
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const response = await fetch(url, { ...options, headers });
+  const { logout } = useContext(AuthContext);
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Erreur réseau');
+  async function apiFetch(url, options = {}) {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(API_URL + url, {
+      ...options,
+
+      headers: {
+        "Content-Type": "application/json",
+
+        ...(token && { Authorization: `Bearer ${token}` }),
+
+        ...options.headers,
+      },
+    });
+
+    if (res.status === 204) {
+      return;
+    }
+
+    const data = await res.json();
+
+    if (res.status === 401) {
+      logout();
+
+      throw new Error(data.message || "Une erreur est survenue.");
+    }
+
+    if (res.status === 400) {
+      return { validationErrors: data.errors };
+    }
+
+    if (!res.ok) {
+      throw new Error(data.message || "Une erreur est survenue.");
+    }
+
+    return data;
   }
 
-  if (response.status === 204) return null;
-
-  return response.json();
+  return { apiFetch };
 }
-
-export default useFetch;

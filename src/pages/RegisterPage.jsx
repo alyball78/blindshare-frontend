@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+
 const RegisterPage = () => {
   const {
     register,
@@ -20,6 +21,7 @@ const RegisterPage = () => {
       method: "POST",
       body: JSON.stringify(data),
     });
+    console.log(res);
     login(res.token);
     navigate("/");
   };
@@ -79,7 +81,7 @@ const RegisterPage = () => {
             Confirmer votre mot de passe
           </label>
           <input
-            type="text"
+            type="password"
             id="confirmation_password"
             {...register("confirmation_password", {
               required: "La confirmation du  mot de passe est obligatoire",
@@ -89,18 +91,16 @@ const RegisterPage = () => {
           {errors.password && <p>{errors.password.message}</p>}
         </fieldset>
         <fieldset>
-          <label htmlFor="consent">
+          <label htmlFor="consentGiven">
             J'accepte que mes données soient utilisées pour la création et la
             gestion de mon compte
           </label>
           <input
             type="checkbox"
-            name="consent"
-            id="consent"
-            {...register("consent", { required: true })}
-          />{" "}
-          consent, {}
-          {errors.consent && <p>{errors.consent.message}</p>}
+            id="consentGiven"
+            {...register("consentGiven", { required: true })}
+          />
+          {errors.consentGiven && <p>{errors.consentGiven.message}</p>}
         </fieldset>
         <fieldset>
           <button>S'inscrire</button>
@@ -109,3 +109,5 @@ const RegisterPage = () => {
     </section>
   );
 };
+
+export default RegisterPage;

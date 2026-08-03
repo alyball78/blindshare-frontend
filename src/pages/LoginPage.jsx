@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useFetch } from "../hooks/useFetch";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 const LoginPage = () => {
   const {
     register,
@@ -58,3 +59,5 @@ const LoginPage = () => {
     </section>
   );
 };
+
+export default LoginPage;
