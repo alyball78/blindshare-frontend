@@ -1,9 +1,37 @@
-import React from 'react'
-
+import React, { useState, useEffect } from "react";
+import { useFetch } from "../hooks/useFetch";
+import ArticleCard from "../components/ArticleCard";
 function ArticlesPage() {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const { apiFetch } = useFetch();
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const data = await apiFetch("/articles");
+        setArticles(data);
+        console.log(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArticles();
+  }, []);
+  if (loading) return <p>"Chargement en cours"</p>;
+  if (error) return <p>{"Erreur en cours : " + error}</p>;
+
   return (
-    <div>ArticlesPage</div>
-  )
+    <div>
+      <h1>Liste des articles sur blindShare</h1>
+      {articles.map((article) => (
+        <ArticleCard key={article.id} article={article} />
+      ))}
+    </div>
+  );
 }
 
-export default ArticlesPage
+export default ArticlesPage;
