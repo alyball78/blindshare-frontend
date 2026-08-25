@@ -15,11 +15,13 @@ import CreateArticlePage from "./pages/admin/CreateArticlePage";
 import EditArticlePage from "./pages/admin/EditArticlePage";
 import CategoriesAdminPage from "./pages/admin/CategoriesAdminPage";
 import Navbar from "./components/Navbar";
+import { Toaster } from "sonner";
 
 function App() {
   return (
     <>
       <Navbar />
+      <Toaster/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/articles" element={<ArticlesPage />} />

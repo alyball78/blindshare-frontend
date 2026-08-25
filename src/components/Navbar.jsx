@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { logout, isAuthenticated } = useContext(AuthContext);
+  const { logout, isAuthenticated, role } = useContext(AuthContext);
 
   return (
     <nav aria-label="Navigation principale">
@@ -12,8 +12,18 @@ const Navbar = () => {
           <Link to="/">Accueil</Link>
         </li>
         <li>
-          <Link to="/Articles">Nos articles</Link>
+          <Link to="/articles">Nos articles</Link>
         </li>
+        {isAuthenticated && role === "admin" && (
+          <>
+            <li>
+              <Link to="/admin">Dashboard admin</Link>
+            </li>
+            <li>
+              <Link to="/admin/categories">Catégories admin</Link>
+            </li>
+          </>
+        )}
 
         {!isAuthenticated && (
           <>

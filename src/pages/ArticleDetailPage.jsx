@@ -26,18 +26,19 @@ function ArticleDetailPage() {
   if (error) return <p>{"Erreur en cours : " + error}</p>;
 
   return (
-    <div>
+  <div>
       <h1>Détail de l'article</h1>
 
       <article>
-        <img src={article.cover_image_url} alt="Image de l'article" />
+              <img src={article.cover_image_url} alt="Image de l'article" />
         <h2>Titre de l'article.{article.title}</h2>
         <p>auteur: Admin{article.author}</p>
         <p>contenu de l'article.{article.content}</p>
         <LikeButton />
       </article>
-    </div>
+  </div>
   );
 }
 
 export default ArticleDetailPage;
+  

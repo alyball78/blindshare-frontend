@@ -34,7 +34,7 @@ const RegisterPage = () => {
         aimer, de les partager et même de les télécharger.
       </p>
       <p>
-        Vous avez déjà un compte, merci de bien vouloirr vous identifier{" "}
+        Vous avez déjà un compte, merci de bien vouloir vous identifier{" "}
         <a href="LoginPage.jsx">en cliquant ici</a>
       </p>
       <p>
