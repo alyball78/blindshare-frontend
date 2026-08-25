@@ -30,15 +30,20 @@ function ArticleCard({ article, setArticles, articles }) {
   };
   return (
     <div>
-      <img src={article.cover_image_url} alt="Image de l'article" />
       <h2>{article.title}</h2>
+      <img src={article.cover_image_url} alt="Image de l'article" />
+
       <p>{article.excerpt}</p>
       <p>{article.category_id}</p>
       <p>Publié le {article.created_at}</p>
-      <Link to={"/articles/" + article.id}>Plus de détails</Link>
+      <div>
+        <Link to={"/articles/" + article.id}>Plus de détails</Link>
+      </div>
       {role === "admin" && (
         <>
-          <Link to={"/admin/articles/" + article.id + "/edit"}>Modifier</Link>
+          <div>
+            <Link to={"/admin/articles/" + article.id + "/edit"}>Modifier</Link>
+          </div>
           <button onClick={() => deleteArticle(article)}>Supprimer</button>
         </>
       )}
