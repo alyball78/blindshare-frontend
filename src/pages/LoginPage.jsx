@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { useFetch } from "../hooks/useFetch";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+useDocumentTitle("Page de connexion sur blindShare");
   const { apiFetch } = useFetch();
   const { login } = useContext(AuthContext);
   const onSubmitForm = async (data) => {

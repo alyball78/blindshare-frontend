@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import LikeButton from "../components/LikeButton";
+import { useOpenGraph } from "../hooks/useOpenGraph";
 function ArticleDetailPage() {
   const { id } = useParams();
+  useOpenGraph({ title, description, image });
   const { apiFetch } = useFetch();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);

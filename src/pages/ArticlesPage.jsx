@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useFetch } from "../hooks/useFetch";
 import ArticleCard from "../components/ArticleCard";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 function ArticlesPage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+useDocumentTitle("Liste des articles sur blindShare");
   const { apiFetch } = useFetch();
   useEffect(() => {
     const fetchArticles = async () => {

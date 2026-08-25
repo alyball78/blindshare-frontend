@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ArticleCard from "../components/ArticleCard";
 import { useFetch } from "../hooks/useFetch";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 function HomePage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+useDocumentTitle("Page d'accueil blindShare");
   const { apiFetch } = useFetch();
   useEffect(() => {
     const fetchLastArticles = async () => {

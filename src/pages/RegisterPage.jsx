@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useFetch } from "../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 const RegisterPage = () => {
   const {
@@ -11,6 +12,7 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onTouched" });
+useDocumentTitle("Page d'inscription sur blindShare");
   const { apiFetch } = useFetch();
   const { login } = useContext(AuthContext);
 
