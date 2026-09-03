@@ -35,7 +35,14 @@ function ArticleCard({ article, setArticles, articles }) {
 
       <p>{article.excerpt}</p>
       <p>{article.category_id}</p>
-      <p>Publié le {article.created_at}</p>
+      <p>
+        Publié le{" "}
+        {new Date(article.created_at).toLocaleDateString("fr-FR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        })}
+      </p>
       <div>
         <Link to={"/articles/" + article.id}>Plus de détails</Link>
       </div>
