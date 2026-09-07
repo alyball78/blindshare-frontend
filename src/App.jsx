@@ -16,18 +16,27 @@ import EditArticlePage from "./pages/admin/EditArticlePage";
 import CategoriesAdminPage from "./pages/admin/CategoriesAdminPage";
 import Navbar from "./components/Navbar";
 import { Toaster } from "sonner";
+import AccountPage from "./pages/AccountPage";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Toaster/>
+      <Toaster />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:id" element={<ArticleDetailPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/account"
+          element={
+            <PrivateRoute>
+              <AccountPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/admin"
           element={
