@@ -25,6 +25,12 @@ const Navbar = () => {
           </>
         )}
 
+        {isAuthenticated && (
+            <li>
+              <Link to="/account">Mon compte</Link>
+            </li>
+        )}
+
         {!isAuthenticated && (
           <>
             <li>
@@ -33,14 +39,8 @@ const Navbar = () => {
             <li>
               <Link to="/login">Se connecter</Link>
             </li>
-            <li>
-              <Link to="/account">Mon compte</Link>
-            </li>
           </>
         )}
-        <li>
-          <Link to="/contact">Nous contacter</Link>
-        </li>
       </ul>
       {isAuthenticated && <button onClick={logout}>Déconnexion</button>}
     </nav>

@@ -37,8 +37,6 @@ export default function CategoriesAdminPage() {
         setLoading(true);
         const data = await apiFetch("/categories");
         setCategories(data);
-
-        console.log(data);
       } catch (err) {
         setErr(err.message);
       } finally {
@@ -75,7 +73,7 @@ export default function CategoriesAdminPage() {
     <>
       <h1>Page catégorie admin</h1>
       {categories.map((category) => (
-        <div key={category.id}>
+        <div key={category.id} className="category-item">
           <div>{category.name}</div>
           <button onClick={() => deleteCategory(category)}>
             Supprimer la catégorie

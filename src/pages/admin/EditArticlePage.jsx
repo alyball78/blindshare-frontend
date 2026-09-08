@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { useEffect, useState } from "react";
 
 function EditArticlePage() {
-const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
@@ -28,8 +28,6 @@ const [categories, setCategories] = useState([]);
           setLoading(true);
           const data = await apiFetch("/categories");
           setCategories(data);
-
-          console.log(data);
         } catch (err) {
           setErr(err.message);
         } finally {
@@ -107,17 +105,17 @@ const [categories, setCategories] = useState([]);
         </fieldset>
         <fieldset>
           <label htmlFor="content">Contenu de l'article</label>
-          <input
-            type="text"
+          <textarea
             id="content"
-            {...register("content", { required: "Le contenu est obligatoire" })}
+            {...register("content", {
+              required: "Le contenu est obligatoire",
+            })}
           />
           {errors.content && <p>{errors.content.message}</p>}
         </fieldset>
         <fieldset>
           <label htmlFor="excerpt">Résumé de l'article</label>
-          <input
-            type="text"
+          <textarea
             id="excerpt"
             {...register("excerpt", {
               required: "Le résumé est obligatoire",
