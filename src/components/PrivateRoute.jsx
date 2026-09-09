@@ -9,7 +9,7 @@ export default function PrivateRoute({ children, role }) {
   const token = localStorage.getItem("token");
   if (!isAuthenticated || !isTokenValid(token)) {
     logout();
-    return <Navigate to="/connexion" />;
+    return <Navigate to="/login" />;
   }
   if (role) {
     const { role: userRole } = jwtDecode(token);

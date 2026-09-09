@@ -1,124 +1,189 @@
+/* ==========================================================================
+   BlindShare — CSS minimaliste (noir / blanc / gris)
+   Calé sur : Navbar, ArticleCard, formulaires react-hook-form (fieldset/label)
+   Accessibilité : focus clavier visible + contrastes AA/AAA
+   ========================================================================== */
+
+/* --- Variables --- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --noir: #111111;
+  --gris-fonce: #333333;
+  --gris: #666666;
+  --gris-clair: #e0e0e0;
+  --blanc: #ffffff;
+  --focus: #005fcc; /* réservée au focus clavier */
+  --erreur: #b30000; /* réservée aux messages d'erreur, ratio ~7:1 sur blanc */
+  --radius: 4px;
+  --espace: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* --- Reset simple --- */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
+/* --- Base --- */
 body {
-  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 1.125rem; /* 18px, confort de lecture */
+  line-height: 1.6;
+  color: var(--noir);
+  background-color: var(--blanc);
 }
 
+h1, h2, h3 { line-height: 1.3; margin-top: 0; }
+h1 { font-size: 2rem; margin-bottom: 1rem; }
+h2 { font-size: 1.4rem; }
+
+a {
+  color: var(--noir);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--gris-fonce); }
+
+/* --- Focus clavier : toujours visible --- */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* --- Structure générale de page --- */
 #root {
-  width: 1126px;
-  max-width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+  padding: 0 var(--espace);
+}
+
+/* --- Navbar --- */
+nav[aria-label="Navigation principale"] {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
-
-.article-grid {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
+  padding: var(--espace) 0;
+  border-bottom: 1px solid var(--gris-clair);
+  margin-bottom: 2rem;
+}
+nav[aria-label="Navigation principale"] ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+nav[aria-label="Navigation principale"] a {
+  font-weight: 600;
+}
+nav[aria-label="Navigation principale"] button {
+  border: 2px solid var(--noir);
+  background: var(--blanc);
+  color: var(--noir);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .article-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* --- ArticleCard : ajoute className="card" sur le <div> racine --- */
+.card {
+  border: 1px solid var(--gris-clair);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.card img { border-radius: var(--radius); margin: 0.75rem 0; }
+.card p { margin: 0.4rem 0; }
+.card h2 { margin-bottom: 0.3rem; }
+
+/* --- Grille d'articles : ajoute className="article-grid" sur le <div>
+   qui contient le .map() dans HomePage / ArticlesPage / AdminPage --- */
+.article-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .article-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* --- Formulaires (react-hook-form : fieldset > label + input) --- */
+form {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+fieldset {
+  border: 1px solid var(--gris-clair);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+legend { font-weight: 600; padding: 0 0.5rem; }
+label { font-weight: 600; display: block; margin-bottom: 0.4rem; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid var(--gris);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-family: inherit;
+}
+input[type="radio"], input[type="checkbox"] {
+  width: auto;
+  margin-right: 0.5rem;
+}
+
+/* Messages d'erreur react-hook-form : <p> directement dans un fieldset.
+   Ciblé automatiquement, aucune className à ajouter. */
+fieldset > p {
+  color: var(--erreur);
+  border-left: 3px solid var(--erreur);
+  padding-left: 0.6rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+fieldset > p::before { content: "⚠ "; }
+
+/* Message de statut (AccountPage : role="status") — automatique */
+[role="status"] {
+  border: 2px solid var(--noir);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Boutons --- */
+button {
+  border: 2px solid var(--noir);
+  background: var(--noir);
+  color: var(--blanc);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+}
+button:hover { background: var(--gris-fonce); border-color: var(--gris-fonce); }
+
+/* --- Page catégories admin : ajoute className="category-item" sur le
+   <div> de chaque catégorie dans CategoriesAdminPage --- */
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gris-clair);
+  padding: 0.75rem 0;
+}
+.category-item button {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
 }
