@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiFetch } from "../services/api";
+import { useFetch } from "../hooks/useFetch";
 
 function AccountPage() {
   const navigate = useNavigate();
@@ -10,10 +10,13 @@ function AccountPage() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+    const { apiFetch } = useFetch();
+
   useEffect(() => {
     const loadAccount = async () => {
       try {
         const data = await apiFetch("/auth/me");
+
 
         setUser(data);
         setPseudo(data.pseudo);

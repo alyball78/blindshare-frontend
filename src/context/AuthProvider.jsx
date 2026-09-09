@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("token");
     setIsAuthenticated(false);
     setRole(null);
+    navigate("/login");
   }
 
   return (

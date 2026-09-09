@@ -12,8 +12,8 @@ function AdminPage() {
     const fetchArticles = async () => {
       try {
         const data = await apiFetch("/articles");
+        
         setArticles(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -25,7 +25,7 @@ function AdminPage() {
   if (loading) return <p>"Chargement en cours"</p>;
   if (error) return <p>{"Erreur en cours : " + error}</p>;
   return (
-    <div>
+    <div className="article-grid">
       <h1>Liste des articles pour les administrateurs</h1>
       <Link to={"/admin/articles/new"}>Créer un article</Link>
       {articles.map((article) => (

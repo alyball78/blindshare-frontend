@@ -6,14 +6,13 @@ function ArticlesPage() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-useDocumentTitle("Liste des articles sur blindShare");
+  useDocumentTitle("Liste des articles sur blindShare");
   const { apiFetch } = useFetch();
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const data = await apiFetch("/articles");
+        const data = await apiFetch("/articles?limit=false");
         setArticles(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -26,7 +25,7 @@ useDocumentTitle("Liste des articles sur blindShare");
   if (error) return <p>{"Erreur en cours : " + error}</p>;
 
   return (
-    <div>
+    <div className="article-grid">
       <h1>Liste des articles sur blindShare</h1>
       {articles.map((article) => (
         <ArticleCard key={article.id} article={article} />
