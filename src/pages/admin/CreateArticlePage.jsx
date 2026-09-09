@@ -23,8 +23,6 @@ const CreateArticlePage = () => {
         setLoading(true);
         const data = await apiFetch("/categories");
         setCategories(data);
-
-        console.log(data);
       } catch (err) {
         setErr(err.message);
       } finally {
@@ -70,6 +68,17 @@ const CreateArticlePage = () => {
       <form onSubmit={handleSubmit(createArticle)}>
         <fieldset>
           <label htmlFor="title">Titre de l'article</label>
+          <textarea
+            id="content"
+            {...register("content", {
+              required: "Le contenu est obligatoire",
+              minLength: { value: 2, message: "Minimum 2 caractères" },
+              maxLength: {
+                value: 200,
+                message: "Max 200 caractères",
+              },
+            })}
+          />
           <input
             type="text"
             id="title"
@@ -86,8 +95,7 @@ const CreateArticlePage = () => {
         </fieldset>
         <fieldset>
           <label htmlFor="excerpt">Résumé de l'article</label>
-          <input
-            type="text"
+          <textarea
             id="excerpt"
             {...register("excerpt", {
               required: "Le résumé est obligatoire",
@@ -101,8 +109,7 @@ const CreateArticlePage = () => {
         </fieldset>
         <fieldset>
           <label htmlFor="content">Contenu de l'article</label>
-          <input
-            type="text"
+          <textarea
             id="content"
             {...register("content", { required: "Le contenu est obligatoire" })}
           />

@@ -15,7 +15,6 @@ useDocumentTitle("Page d'accueil blindShare");
       try {
         const data = await apiFetch("/articles?limit=true");
         setArticles(data);
-        console.log(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -27,7 +26,7 @@ useDocumentTitle("Page d'accueil blindShare");
   if (loading) return <p>"Chargement en cours"</p>;
   if (error) return <p>{"Erreur en cours : " + error}</p>;
   return (
-    <div>
+    <div className="article-grid">
       <h1>
         Bienvenue sur blindShare, le blogue qui valorise les passions au-delà du
         handicap.
@@ -40,7 +39,7 @@ useDocumentTitle("Page d'accueil blindShare");
       {articles.map((article) => (
         <ArticleCard key={article.id} article={article} />
       ))}
-      <Link to={"/articles"}>Voire tous les articles</Link>
+      <Link to={"/articles"}>Voir tous les articles</Link>
     </div>
   );
 }

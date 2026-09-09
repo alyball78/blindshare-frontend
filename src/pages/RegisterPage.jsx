@@ -23,7 +23,6 @@ useDocumentTitle("Page d'inscription sur blindShare");
       method: "POST",
       body: JSON.stringify(data),
     });
-    console.log(res);
     login(res.token);
     navigate("/");
   };
@@ -37,7 +36,7 @@ useDocumentTitle("Page d'inscription sur blindShare");
       </p>
       <p>
         Vous avez déjà un compte, merci de bien vouloir vous identifier{" "}
-        <a href="LoginPage.jsx">en cliquant ici</a>
+        <a href="/login">en cliquant ici</a>
       </p>
       <p>
         Pour vous inscrire, merci de bien vouloir renseigner les éléments
